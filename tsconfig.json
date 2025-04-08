@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "lib": ["ES2020"],
+    "strict": true,
+    "declaration": true,
+    "outDir": "dist",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*"]
+    }
+  },
+  "include": ["tools/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
