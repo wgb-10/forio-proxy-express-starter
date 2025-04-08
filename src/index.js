@@ -65,6 +65,20 @@ try {
 
 app.get('/', (req, res) => res.status(200).send('Server is running!'));
 
+const completion = async (req, res) => {
+  const { prompt } = req.body;
+
+  /* do some work ...
+   *
+   *
+   *
+   */
+
+  return res.status(200).json({ data: prompt });
+};
+
+app.post('/completion', completion);
+
 async function main() {
   const port = epicenter.proxyConfig().externalPort;
   app.listen(port, () => epicenter.log('INFO', `Listening on port ${port}`));
