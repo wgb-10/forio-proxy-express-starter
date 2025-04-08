@@ -1,8 +1,10 @@
 import { getRunKey, login, stopProxy } from './epicenter';
 
-export const stop = async () => {
-  const token = await login();
-  console.log('Logged in ✓');
+export const stop = async (token?: string) => {
+  if (!token) {
+    token = await login();
+    console.log('Logged in ✓');
+  }
 
   const runKey = await getRunKey(token);
   console.log('Run key retrieved ✓', `(${runKey})`);

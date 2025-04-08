@@ -1,8 +1,16 @@
+import config from './config.json';
 import { emptyDirectory, explodeZip, login, postZip } from './epicenter';
 import { stop } from './stop';
 import { createZipFile } from './zip';
 
 async function main() {
+  console.log(
+    'Deploy to',
+    config.SERVER,
+    config.ACCOUNT_SHORT_NAME,
+    config.PROJECT_SHORT_NAME
+  );
+
   const token = await login();
   console.log('Logged in ✓');
 
@@ -20,7 +28,7 @@ async function main() {
 
   console.log('Deployment completed ✓');
 
-  await stop();
+  await stop(token);
 
   console.log('All done!');
 }

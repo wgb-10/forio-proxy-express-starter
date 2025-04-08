@@ -46,7 +46,7 @@ export const login = () =>
       },
     })
     .then(({ body }) => body)
-    .then(({ token }) => token);
+    .then(({ token }) => token as string);
 
 export const getFiles = (token: string, path: string) =>
   router()
