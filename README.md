@@ -6,35 +6,23 @@ Starter code for running an Express server using an Epicenter proxy.
 
 Complete the following required Epicenter configuration.
 
-1. Project: prepare proxy:
+1. Account: `allowProjectScopedModels`:
 
    ```bash
-   curl --request GET \
-     --url https://forio.com/api/v3/<account>/<project>/project/proxy/prepare \
-     --header 'authorization: Bearer <token>'
+   curl --request PATCH \
+     --url https://forio.com/api/v3/<account>/<project>/account \
+     --header 'authorization: Bearer <token>' \
+     --header 'content-type: application/json' \
+     --data '{
+     "objectType": "team",
+     "accountSetting": {
+       "allowProjectScopedModels": true
+     }
+   }'
    ```
 
-   (Note: requires >=DASHBOARD permissions, not settable by all users)
-
-   1. Account: `allowProjectScopedModels`.
-
-      Step 1 may have failed if the account setting `allowProjectScopedModels`
-      is not set to `true`:
-
-      ```bash
-      curl --request PATCH \
-        --url https://forio.com/api/v3/<account>/<project>/account \
-        --header 'authorization: Bearer <token>' \
-        --header 'content-type: application/json' \
-        --data '{
-        "objectType": "team",
-        "accountSetting": {
-          "allowProjectScopedModels": true
-        }
-      }'
-      ```
-
-      (Note: anointed field, may not be settable by all users)
+   (Note: This anointed field may not be settable by all users. If the request
+   is rejected, carry on: the proper setting may already be in place.)
 
 2. Project: `modelFile`
 
