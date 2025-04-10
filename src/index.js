@@ -29,9 +29,9 @@ try {
 
     config.setContext({
       apiProtocol: 'https',
-      apiHost: '',
-      accountShortName: '',
-      projectShortName: '',
+      apiHost: env.API_HOST,
+      accountShortName: env.ACCOUNT_SHORT_NAME,
+      projectShortName: env.PROJECT_SHORT_NAME,
     });
     epicenter = {
       proxyConfig: () => ({
