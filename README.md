@@ -28,7 +28,7 @@ Complete the following required Epicenter configuration.
 
    ```bash
    curl --request PATCH \
-     --url forio.com/api/v3/<account>/<project>project \
+     --url forio.com/api/v3/<account>/<project>/project \
      --header 'authorization: Bearer <token>' \
      --header 'content-type: application/json' \
      --data '{
