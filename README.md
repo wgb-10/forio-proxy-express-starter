@@ -39,10 +39,9 @@ Complete the following required Epicenter configuration.
 
 ## Deployment
 
-1. `npm install`
-2. Copy `tools/config.example.json` to `tools/config.json` and fill in the
+1. Copy `tools/config.example.json` to `tools/config.json` and fill in the
    required fields. Do not commit `config.json`.
-3. `npm run deploy`
+2. `npm run deploy`
 
 ## Consumption
 
