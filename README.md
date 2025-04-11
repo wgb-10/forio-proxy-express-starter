@@ -65,6 +65,33 @@ simple message indicating that the server is running.
 A handler for `POST /completions` would receive requests at
 `https://forio.com/proxy/<account>/<project>/completions`, and so on.
 
+### Example
+
+```typescript
+/**
+ * Fetch against the proxy with the native `fetch` API.
+ * Optional `normalizeFetchResponse` utility aligns `fetch` behavior
+ * with other `epicenter-libs` requests. (see `tools/epicenter.ts`)
+ */
+
+import { normalizeFetchResponse } from './tools/epicenter';
+
+const completion = await fetch(
+  'https://forio.com/proxy/<account>/<project>/completions',
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      prompt:
+        "What's a good strategy for managing an employee who keeps mumbling about a missing stapler?",
+    }),
+  }
+).then(normalizeFetchResponse);
+```
+
 ## Common use cases
 
 - Authenticate Epicenter with a privileged `secretKey` to perform privileged
