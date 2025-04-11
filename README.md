@@ -21,8 +21,19 @@ Complete the following required Epicenter configuration.
    }'
    ```
 
-   (Note: This anointed field may not be settable by all users. If the request
-   is rejected, carry on: the proper setting may already be in place.)
+   Note: This anointed field may not be settable by all users. If the request is
+   rejected:
+
+   1. Get account details:
+
+   ```bash
+   curl --request GET \
+   --url https://forio.com/api/v3/tr/project/account \
+   --header 'authorization: Bearer {{token}}'
+   ```
+
+   See `accountSetting.allowProjectScopedModels`. If this setting is false,
+   contact a Forio representative.
 
 2. Project: `modelFile`
 
