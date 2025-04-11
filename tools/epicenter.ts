@@ -5,25 +5,42 @@ export const normalizeFetchResponse = async (
   response: Response,
   reader?: (response: Response) => Promise<any>
 ) => {
-  const contentType = response.headers.get('content-type');
-  const matchJSON =
-    contentType === 'application/json' ||
-    contentType === 'application/json; charset=utf-8';
-  const payload = reader
-    ? await reader(response)
-    : matchJSON
-    ? await response.json()
-    : await response.text();
+  const contentType = response.headers.get('content-type') || '';
+  const matchJSON = contentType.toLowerCase().includes('application/json');
+
+  let payload;
+  try {
+    payload = reader
+      ? await reader(response)
+      : matchJSON
+      ? await response.json()
+      : await response.text();
+  } catch (parseError) {
+    throw new Fault(
+      {
+        status: response.status,
+        message: `Failed to parse response from ${response.url} with response type ${contentType}.`,
+        cause: parseError,
+      },
+      response
+    );
+  }
+
   if (response.ok) return payload;
-  if (typeof payload === 'string')
-    throw new Fault({
-      status: response.status,
-      message: payload,
-    });
+
+  const message =
+    typeof payload === 'string'
+      ? payload
+      : payload?.message || 'An unknown error occurred';
+
   throw new Fault(
     {
       status: response.status,
-      message: payload.message,
+      message,
+      information:
+        typeof payload === 'object' && payload?.code
+          ? { code: payload.code, ...payload }
+          : undefined,
     },
     response
   );
