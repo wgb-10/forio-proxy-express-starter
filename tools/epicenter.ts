@@ -38,8 +38,8 @@ export const normalizeFetchResponse = async (
       status: response.status,
       message,
       information:
-        typeof payload === 'object' && payload?.code
-          ? { code: payload.code, ...payload }
+        typeof payload === 'object' && 'information' in payload
+          ? payload.information
           : undefined,
     },
     response
