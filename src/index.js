@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const epicenterLibs = require('epicenter-libs');
 const { config } = epicenterLibs;
+const { verify } = require('./middleware');
 
 const app = express();
 
@@ -16,7 +17,7 @@ app.use(express.json());
 try {
   const proxyConfig = epicenter.proxyConfig();
   config.setContext({
-    apiProtocol: 'http',
+    apiProtocol: proxyConfig.apiScheme,
     apiHost: proxyConfig.apiHost,
     accountShortName: proxyConfig.accountShortName,
     projectShortName: proxyConfig.projectShortName,
@@ -77,7 +78,7 @@ const completion = async (req, res) => {
   return res.status(200).json({ data: prompt });
 };
 
-app.post('/completion', completion);
+app.post('/completion', verify(epicenter), completion);
 
 async function main() {
   const port = epicenter.proxyConfig().externalPort;
