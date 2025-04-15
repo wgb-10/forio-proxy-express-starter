@@ -35,16 +35,19 @@ Complete the following required Epicenter configuration.
    See `accountSetting.allowProjectScopedModels`. If this setting is false,
    contact a Forio representative.
 
-2. Project: `modelFile`
+2. Set project settings:
 
    ```bash
    curl --request PATCH \
-     --url forio.com/api/v3/<account>/<project>/project \
+     --url https://forio.com/api/v3/<account>/<project>/project \
      --header 'authorization: Bearer <token>' \
      --header 'content-type: application/json' \
      --data '{
      "objectType": "team",
-     "modelFile": "index.js"
+     "modelFile": "index.js",
+     "legacySettings": {
+       "transmogrifierActive": true
+     }
    }'
    ```
 
