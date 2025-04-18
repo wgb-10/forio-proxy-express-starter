@@ -17,7 +17,7 @@ app.use(express.json());
 try {
   const proxyConfig = epicenter.proxyConfig();
   config.setContext({
-    apiProtocol: proxyConfig.apiScheme,
+    apiProtocol: proxyConfig.apiScheme.toLowerCase(),
     apiHost: proxyConfig.apiHost,
     accountShortName: proxyConfig.accountShortName,
     projectShortName: proxyConfig.projectShortName,
@@ -64,7 +64,7 @@ try {
   }
 }
 
-app.get('/', (req, res) => res.status(200).send('Server is running!'));
+app.get('/', (req, res) => res.status(200).json(epicenter.proxyConfig()));
 
 const completion = async (req, res) => {
   const { prompt } = req.body;
