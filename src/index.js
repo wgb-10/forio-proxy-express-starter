@@ -64,7 +64,7 @@ try {
   }
 }
 
-app.get('/', (req, res) => res.status(200).json(epicenter.proxyConfig()));
+app.get('/', (req, res) => res.send('Server is running :)'));
 
 const completion = async (req, res) => {
   const { prompt } = req.body;
