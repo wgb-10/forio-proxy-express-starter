@@ -28,7 +28,7 @@ Complete the following required Epicenter configuration.
 
    ```bash
    curl --request GET \
-   --url https://forio.com/api/v3/tr/project/account \
+   --url https://forio.com/api/v3/<account>/<project>/account \
    --header 'authorization: Bearer {{token}}'
    ```
 
