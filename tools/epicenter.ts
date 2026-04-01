@@ -125,7 +125,11 @@ export const getRunKey = (token: string) => {
   return fetch(url, {
     method: 'GET',
     headers: { Authorization: `Bearer ${token}` },
-  }).then((res) => normalizeFetchResponse(res, (res) => res.text()));
+  }).then((res) =>
+    normalizeFetchResponse(res, (res) => res.text()).then((runKey) =>
+      runKey.replace(/^"(.*)"$/, '$1')
+    )
+  );
 };
 
 export const stopProxy = (token: string) => (runKey: string) =>
